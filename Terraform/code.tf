@@ -67,8 +67,8 @@ resource "aws_instance" "webserver" {
     sudo yum install httpd -y
     sudo systemctl start httpd 
     sudo systemctl enable httpd
-    sudo mkfs -t ext4 /dev/xvdb
-    sudo mount /dev/xvdb /var/www/html
+    sudo mkfs -t ext4 /dev/xvdc
+    sudo mount /dev/xvdc /var/www/html
     EOF
 
   tags = {
