@@ -39,7 +39,14 @@ resource "aws_security_group" "secg" {
 }
 
 
+resource "aws_s3_bucket" "bk1bk" {
+	bucket="bk1bk"
+	acl = "public-read"
 
+	tags = {
+		Name = "bk1bk"
+	}
+}
 
 resource "aws_ebs_volume" "storage" {
   availability_zone = "ap-south-1b"
