@@ -50,7 +50,7 @@ resource "aws_ebs_volume" "storage" {
 }
 
 resource "aws_volume_attachment" "storage-attachment"{
-  device_name   = "/dev/sdc"
+  device_name   = "/dev/xvdh"
   volume_id     = "${aws_ebs_volume.storage.id}"
   instance_id   = "${aws_instance.webserver.id}"
 }
@@ -67,8 +67,8 @@ resource "aws_instance" "webserver" {
     sudo yum install httpd -y
     sudo systemctl start httpd 
     sudo systemctl enable httpd
-    sudo mkfs -t ext4 /dev/xvdc
-    sudo mount /dev/xvdc /var/www/html
+    sudo mkfs -t ext4 /dev/xvdh
+    sudo mount /dev/xvdh /var/www/html
     EOF
 
   tags = {
