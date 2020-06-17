@@ -1,7 +1,7 @@
 resource "aws_cloudfront_distribution" "front" {
   origin {
     domain_name = "${aws_s3_bucket.bk2bk.bucket_regional_domain_name}"
-    origin_id   = "${local.s3_origin_id}"
+    origin_id   = "S3-bk2bk"
 
     custom_origin_config {
       http_port = 80
@@ -12,11 +12,11 @@ resource "aws_cloudfront_distribution" "front" {
   }
 
   enabled = true 
-
+  is_ipv6_enabled     = true
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${local.s3_origin_id}"
+    target_origin_id = "S3-bk2bk"
 
     forwarded_values {
       query_string = false
@@ -32,7 +32,15 @@ resource "aws_cloudfront_distribution" "front" {
     max_ttl                = 86400
   }
   
+  restrictions {
+    geo_restriction {
+      restriction_type = "whitelist"
+      locations        = ["US" , "IN"]
+    }
+  }
+
   viewer_certificate {
     cloudfront_default_certificate = true
   }
+
 }
