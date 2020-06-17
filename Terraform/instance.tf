@@ -1,3 +1,4 @@
+
 resource "aws_instance" "webserver" {
   ami            =      "ami-0447a12f28fddb066"
   availability_zone = "ap-south-1b"
